@@ -1,5 +1,7 @@
 # Student-Prediction-End-to-End-ML-Project-Notes
 
+**Very Important: GitHub actions code for CI/CD is already present in Github Actions Marketplace. Github --> Actions --> Workflow --> New Workflow --> It has code on "Deploy to Amazon ECS"; Krish directly copy pasted from there and configured**
+
 **A) Github And Code Setup**
 
 **B) Project Structure, Logging and Exception**
