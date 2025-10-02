@@ -24,6 +24,12 @@
 
 **K) Deployment In Azure Web App**
 
+**Learning while Deployment with creating Docker Image:**
+
+Initially, when you tried building your Docker image using python:3.7-slim-buster, the build failed because the Debian Buster repositories had become outdated. The apt update command could not fetch package lists, giving errors like “does not have a Release file.” Later, when trying to install CatBoost via pip install -r requirements.txt, the build failed again because CatBoost attempted to compile from source. The errors showed missing compilers and build tools, with CMake complaining about clang, clang++, and Ninja not being found, resulting in a subprocess.CalledProcessError. Essentially, your image lacked the necessary build dependencies and the repository URLs were outdated, so both system-level packages and Python packages requiring compilation could not be installed successfully.
+
+We fixed the issue by updating the Dockerfile in two ways. First, we switched the Debian repository URLs to the archive version and disabled “Check-Valid-Until” to allow apt-get update to succeed. Then, we installed all required build tools (build-essential, python3-dev, libssl-dev, wget) to satisfy dependencies for packages that might need compilation. Finally, instead of building CatBoost from source, we explicitly installed a precompiled version using pip install catboost==1.2.2 before installing the rest of the requirements. This combination ensured that system packages were available, CatBoost was installed without compilation errors, and the image build completed successfully.
+
 # **A) Github And Code Setup**
 
 So guys, we are about to start the end to end machine learning implementation, web deployment. And again the main aim of this specific series is to develop end to end projects and the things that we are going to learn. The similar things are basically applied in the industry when we are solving any kind of projects. Uh, we are going to basically discuss in this series about each and every module, what all things we can basically do on top of it, and how we can easily crack any data science interviews. This end to end project implementation will be a game changer for cracking data science interviews. Why? Because all the students who have till now cracked, or any professionals who have cracked data science interviews, they have really explained the projects very well.
